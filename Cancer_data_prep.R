@@ -1,0 +1,15 @@
+Cancer.Cells <- read.csv("~/Project_Data_Files/Bone_Cell/Cancer/Cancer_Cells.csv", header=FALSE)
+Cancer.Cells <- subset(Cancer.Cells,(Cancer.Cells$V7==1))
+Cancer_Edge<-as.data.frame(Cancer.Cells[,c(1,4)])
+write.csv(Cancer_Edge,file="~/Project_Data_Files/Bone_Cell/Cancer/Cancer_Edges.csv")
+Cancer_col1<-as.data.frame(Cancer_Edge[,1])
+Cancer_col2<-as.data.frame(Cancer_Edge[,2])
+colnames(Cancer_col1)<-"col"
+colnames(Cancer_col2)<-"col"
+Ncol1<- as.vector(Cancer_col1[,1])
+Ncol2<- as.vector(Cancer_col2[,1])
+Unique <- unique(append(Ncol1,Ncol2))
+Cancer_Nodes<-as.data.frame(Unique)
+Cancer_Nodes["index"]<-c(1:351)
+write.csv(Cancer_Nodes, file = "~/Project_Data_Files/Bone_Cell/Cancer/Cancer_index.csv")
+write(Unique, file="~/Project_Data_Files/Bone_Cell/Cancer/Cancer_Active_Nodes.txt")
