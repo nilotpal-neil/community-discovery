@@ -1,0 +1,15 @@
+Normal.Cells <- read.csv("~/Project_Data_Files/Bone_Cell/Normal/Normal_Cells.csv", header=FALSE)
+Normal.Cells <- subset(Normal.Cells,(Normal.Cells$V7==1))
+Normal_Edge<-as.data.frame(Normal.Cells[,c(1,4)])
+write.csv(Normal_Edge,file="~/Project_Data_Files/Bone_Cell/Normal/Normal_Edges.csv")
+Normal_col1<-as.data.frame(Normal_Edge[,1])
+Normal_col2<-as.data.frame(Normal_Edge[,2])
+colnames(Normal_col1)<-"col"
+colnames(Normal_col2)<-"col"
+Ncol1<- as.vector(Normal_col1[,1])
+Ncol2<- as.vector(Normal_col2[,1])
+Unique <- unique(append(Ncol1,Ncol2))
+Normal_Nodes<-as.data.frame(Unique)
+Normal_Nodes["index"]<-c(1:192)
+write.csv(Normal_Nodes, file = "~/Project_Data_Files/Bone_Cell/Normal/Normal_index.csv")
+write(Unique, file="~/Project_Data_Files/Bone_Cell/Normal/Normal_Active_Nodes.txt")
